@@ -6,8 +6,11 @@ import { IonContent,
   IonTitle, 
   IonToolbar, 
   IonButton, 
-  IonBackButton} from '@ionic/angular';
+  IonBackButton,
+  IonLabel,
+  IonItem} from '@ionic/angular';
 import {IonButtons} from '@ionic/angular' ;
+import {Personne} from '../../modeles/Personne' ;
 
 @Component({
   selector: 'app-new',
@@ -21,11 +24,34 @@ import {IonButtons} from '@ionic/angular' ;
     FormsModule, 
     IonButton,
     IonBackButton,
-    IonButtons]
+    IonButtons,
+    IonLabel,
+    IonItem]
 })
-export class NewPage implements OnInit {
+export class NewPage implements OnInit 
+{
 
-  constructor() { }
+  protected ageDuCapitaine: number ;
+  protected lesPersonnes: Array<Personne> ;
+
+  constructor() 
+  { 
+    this.ageDuCapitaine = 18 ;
+    this.lesPersonnes = new Array<Personne>() ;
+
+    this.lesPersonnes.push( new Personne( "Dupond", "Charles")) ;
+    this.lesPersonnes.push( new Personne( "Durant", "Pierre")) ;
+  }
+
+  anniversaireDuCapitaine()
+  {
+    this.ageDuCapitaine++ ;
+  }
+
+  ajoutePersonne(): void
+  {
+    this.lesPersonnes.push( new Personne( "Toto", "Titi") ) ;
+  }
 
   ngOnInit() {
   }

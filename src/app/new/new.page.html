@@ -13,4 +13,12 @@
       <ion-title size="large">new</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-label>L'age du capitaine est {{ageDuCapitaine}} ans</ion-label>
+  <ion-button (click)="anniversaireDuCapitaine()">Fêter l'anniversaire du capitaine</ion-button>
+  <ion-button (click)="ajoutePersonne()">Ajouter une personne</ion-button>
+  @for( personne of lesPersonnes; track $index )
+  {
+    <ion-item>nom: {{personne.nom}} prenom: {{personne.prenom}}</ion-item>
+  }
+  <ion-item>tata</ion-item>
 </ion-content>
