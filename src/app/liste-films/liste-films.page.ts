@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem } from '@ionic/angular';
@@ -13,15 +13,13 @@ import { FilmService } from '../../services/film.service';
 })
 export class ListeFilmsPage implements OnInit 
 {
-  protected lesFilms: Array<Film> ;
+  // L'attribut lesFilms devient un signal de type tableau de Film
+  protected lesFilms = signal<Film[]>( new Array<Film>() ) ;
   protected filmService: FilmService ;
 
   constructor( filmService: FilmService ) 
   { 
     this.filmService = filmService ;
-
-    // On crée le tableau et on copie sa référence dans l'attribut lesFilms
-    this.lesFilms = new Array<Film>() ; 
   }
 
   ngOnInit() 
@@ -29,7 +27,7 @@ export class ListeFilmsPage implements OnInit
     // Abonnement à la méthode getTousLesFilms du service FilmService
     this.filmService.getTousLesFilms().subscribe( (lesFilms)=>
     {
-      this.lesFilms = lesFilms ;
+      this.lesFilms.set( lesFilms ) ;
     }) ;
   }
 
