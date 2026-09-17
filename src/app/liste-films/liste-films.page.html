@@ -10,7 +10,7 @@
       <ion-title size="large">listeFilms</ion-title>
     </ion-toolbar>
   </ion-header>
-  @for( film of lesFilms ;  track film.id )
+  @for( film of lesFilms | async ;  track film.id )
   {
     <ion-item>
       {{film.id}} {{film.titre}} {{film.annee}}

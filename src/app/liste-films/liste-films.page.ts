@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem } from '@ionic/angular';
 import { Film } from '../../modeles/Film' ;
 import { FilmService } from '../../services/film.service';
+import {Observable} from "rxjs" ;
 
 @Component({
   selector: 'app-liste-films',
@@ -13,23 +14,17 @@ import { FilmService } from '../../services/film.service';
 })
 export class ListeFilmsPage implements OnInit 
 {
-  protected lesFilms: Array<Film> ;
+  protected lesFilms: Observable<Film[]> | null = null ;
   protected filmService: FilmService ;
 
   constructor( filmService: FilmService ) 
   { 
     this.filmService = filmService ;
-
-    // On crée le tableau et on copie sa référence dans l'attribut lesFilms
-    this.lesFilms = new Array<Film>() ; 
   }
 
   ngOnInit() 
   {
-    this.filmService.getTousLesFilms().subscribe( (lesFilms)=>
-    {
-      this.lesFilms = lesFilms ;
-    }) ;
+    this.lesFilms = this.filmService.getTousLesFilms() ;
   }
 
 }
