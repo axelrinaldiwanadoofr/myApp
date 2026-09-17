@@ -26,6 +26,7 @@ export class ListeFilmsPage implements OnInit
 
   ngOnInit() 
   {
+    // Abonnement à la méthode getTousLesFilms du service FilmService
     this.filmService.getTousLesFilms().subscribe( (lesFilms)=>
     {
       this.lesFilms = lesFilms ;
